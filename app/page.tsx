@@ -1,21 +1,10 @@
 'use client';
 
-import ActivityFeed from '@/components/dashboard/ActivityFeed';
+import { LiveDashboardMockup } from '@/components/features/LiveDashboardMockup';
+import { CrimsonArrowIcon, ShieldCheckIcon } from '@/components/icons';
+import { Offer, Stat } from '@/types';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-type Stat = {
-  value: string;
-  label: string;
-  detail: string;
-};
-
-type Offer = {
-  title: string;
-  description: string;
-  metrics: string[];
-};
 
 const stats: Stat[] = [
   {
@@ -88,12 +77,6 @@ const logos = [
   'ZAPIER',
 ];
 
-const dashboardChannels = [
-  { label: 'Outbound Penetration', baseWidth: 92 },
-  { label: 'Email Engagement', baseWidth: 76 },
-  { label: 'Lead Reactivation', baseWidth: 68 },
-];
-
 const reveal = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay = 0) => ({
@@ -106,123 +89,6 @@ const reveal = {
     },
   }),
 };
-
-function CrimsonArrowIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      className="h-5 w-5"
-    >
-      <path d="M7 17 17 7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M8.5 7H17v8.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function LiveDashboardMockup() {
-  const [bookedMeetings, setBookedMeetings] = useState(186);
-  const [qualifiedLeads, setQualifiedLeads] = useState(31);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      if (Math.random() > 0.45) {
-        setBookedMeetings((current) => current + 1);
-      }
-
-      setQualifiedLeads((current) => {
-        const direction = Math.random() > 0.5 ? 1 : -1;
-        const nextValue = current + direction;
-
-        return Math.min(34, Math.max(31, nextValue));
-      });
-    }, 4000);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
-      <div className="absolute right-6 top-6 flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50/50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
-        <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-        Active Sync
-      </div>
-
-      <div className="border-b border-gray-100 pb-5 pr-32 dark:border-slate-800">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-600">
-            Real-Time Lead Dashboard
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-semibold text-gray-900 dark:text-white">
-            Live pipeline visibility for every client.
-          </h2>
-        </div>
-      </div>
-
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        {[
-          { label: 'Qualified leads', value: `+${qualifiedLeads}%` },
-          { label: 'Avg. speed to lead', value: '42 sec' },
-          { label: 'Booked meetings', value: bookedMeetings.toString() },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="rounded-3xl border border-gray-100 bg-gray-50 p-4 shadow-md dark:border-slate-800 dark:bg-slate-950"
-          >
-            <p className="text-sm text-gray-600 dark:text-slate-400">{item.label}</p>
-            <p className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">
-              {item.value}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-md dark:border-slate-800 dark:bg-slate-950">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">
-              Campaign Efficiency
-            </p>
-            <span className="text-xs text-gray-500 dark:text-slate-400">Last 30 days</span>
-          </div>
-          <div className="mt-5 space-y-4">
-            {dashboardChannels.map((item, index) => (
-              <div key={item.label}>
-                <div className="mb-2 flex items-center justify-between text-sm text-gray-600 dark:text-slate-400">
-                  <span>{item.label}</span>
-                  <span>{item.baseWidth}%</span>
-                </div>
-                <div className="h-2.5 rounded-full bg-gray-100 dark:bg-slate-800">
-                  <motion.div
-                    className="h-2.5 rounded-full bg-gradient-to-r from-red-600 to-slate-900 dark:to-slate-200"
-                    initial={{ width: `${item.baseWidth - 2}%` }}
-                    animate={{
-                      width: [
-                        `${item.baseWidth - 2}%`,
-                        `${item.baseWidth}%`,
-                        `${item.baseWidth - 1}%`,
-                      ],
-                    }}
-                    transition={{
-                      duration: 6 + index,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <ActivityFeed />
-      </div>
-    </div>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -301,25 +167,7 @@ export default function HomePage() {
                   key={badge}
                   className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-200/60 bg-slate-50/40 px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 backdrop-blur-sm transition-all duration-300 hover:border-slate-300 hover:bg-white dark:border-slate-800/60 dark:bg-slate-900/40 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-800 sm:w-auto sm:justify-start md:text-[11px]"
                 >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    className="h-3 w-3 text-slate-400 dark:text-slate-500"
-                  >
-                    <path
-                      d="M10 2.5 4.75 4.5v4.75c0 3.28 2.21 6.2 5.25 7 3.04-.8 5.25-3.72 5.25-7V4.5L10 2.5Z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="m7.85 10.05 1.45 1.45 2.85-3.1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <ShieldCheckIcon />
                   {badge}
                 </div>
               ))}
@@ -371,7 +219,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="bg-white py-24 dark:bg-slate-950">
+      <section id="services" className="bg-white py-16 md:py-24 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial="hidden"
@@ -453,7 +301,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="trust-layer" className="bg-gray-50 py-20 dark:bg-slate-900/60 md:py-32">
+      <section id="trust-layer" className="bg-gray-50 py-16 dark:bg-slate-900/60 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial="hidden"

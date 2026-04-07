@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Integration, TrustItem } from '@/types';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { 
-  Cloud, Share2, LayoutDashboard, PhoneCall, 
-  ShieldCheck, Lock, FileKey2 
+  Cloud, FileKey2, LayoutDashboard, Lock, PhoneCall, Share2, 
+  ShieldCheck 
 } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect } from 'react';
 
 const reveal = {
   hidden: { opacity: 0, y: 15 },
@@ -21,7 +22,7 @@ const reveal = {
   }),
 };
 
-const integrations = [
+const integrations: Integration[] = [
   {
     name: 'Salesforce',
     icon: Cloud,
@@ -44,7 +45,7 @@ const integrations = [
   },
 ];
 
-const trustItems = [
+const trustItems: TrustItem[] = [
   {
     title: 'TCPA Adherence',
     icon: ShieldCheck,

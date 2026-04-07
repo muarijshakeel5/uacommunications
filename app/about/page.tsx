@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect } from 'react'; // Added useEffect import
+import { CoreValue, Pillar } from '@/types';
 import { motion } from 'framer-motion';
+import { BarChart3, Shield, ShieldCheck, Users2, Zap } from 'lucide-react';
 import Link from 'next/link';
-import { ShieldCheck, Zap, BarChart3, Users2, Shield } from 'lucide-react';
+import { useEffect } from 'react';
 
 const reveal = {
   hidden: { opacity: 0, y: 15 },
@@ -18,7 +19,7 @@ const reveal = {
   }),
 };
 
-const pillars = [
+const pillars: Pillar[] = [
   {
     icon: ShieldCheck,
     title: 'SLA-Driven Precision',
@@ -41,7 +42,7 @@ const pillars = [
   },
 ];
 
-const coreValues = [
+const coreValues: CoreValue[] = [
   {
     title: 'Relentless QA',
     description:

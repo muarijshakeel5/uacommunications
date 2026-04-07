@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import Footer from '@/components/Footer';
-import GlobalFloorStatus from '@/components/GlobalFloorStatus';
-import IntroAnimation from '@/components/IntroAnimation';
-import Navbar from '@/components/Navbar';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import Footer from '@/components/layout/Footer';
+import GlobalFloorStatus from '@/components/features/GlobalFloorStatus';
+import IntroAnimation from '@/components/features/IntroAnimation';
+import Navbar from '@/components/layout/Navbar';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import './globals.css';
 
 export const metadata: Metadata = {

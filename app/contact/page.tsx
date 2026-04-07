@@ -1,8 +1,11 @@
 'use client';
 
-import { useEffect } from 'react'; // Added React import for scroll fix
+import { ContactChannel } from '@/types';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { 
+  CheckCircle2, Mail, MapPin, Phone, ShieldCheck 
+} from 'lucide-react';
+import { useEffect } from 'react';
 
 const reveal = {
   hidden: { opacity: 0, y: 0 }, 
@@ -16,6 +19,12 @@ const reveal = {
     },
   }),
 };
+
+const channels: ContactChannel[] = [
+  { icon: Mail, label: 'Partnerships', val: 'partnerships@uacommunications.co' },
+  { icon: Phone, label: 'Direct Phone', val: '+92 300 0000000' },
+  { icon: MapPin, label: 'Lahore HQ', val: 'DHA · Lahore, PK' }
+];
 
 export default function ContactPage() {
   
@@ -106,11 +115,7 @@ export default function ContactPage() {
             >
               <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Direct Channels</h3>
               <div className="mt-8 space-y-6">
-                {[
-                  { icon: Mail, label: 'Partnerships', val: 'partnerships@uacommunication.com' },
-                  { icon: Phone, label: 'Direct Phone', val: '+92 300 0000000' },
-                  { icon: MapPin, label: 'Lahore HQ', val: 'DHA · Lahore, PK' }
-                ].map((item) => (
+                {channels.map((item) => (
                   <div key={item.label} className="flex items-center gap-4">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600 dark:bg-red-500/10">
                       <item.icon className="h-4.5 w-4.5" />

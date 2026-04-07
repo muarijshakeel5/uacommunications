@@ -1,18 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { CaseStudy } from '@/types';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-
-type CaseStudy = {
-  client: string; // <-- NEW FIELD
-  sector: string;
-  title: string;
-  metric: string;
-  metricLabel: string;
-  summary: string;
-  highlights: string[];
-};
+import { useEffect } from 'react';
 
 // I added placeholder client names here. You can swap these out for your actual clients!
 const caseStudies: CaseStudy[] = [

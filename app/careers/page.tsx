@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Perk, Role } from '@/types';
 import { motion } from 'framer-motion';
-import { ArrowRight, TrendingUp, Building2, Rocket } from 'lucide-react';
+import { ArrowRight, Building2, Rocket, TrendingUp } from 'lucide-react';
+import { useEffect } from 'react';
 
 const reveal = {
   hidden: { opacity: 0, y: 15 },
@@ -13,7 +14,7 @@ const reveal = {
   }),
 };
 
-const perks = [
+const perks: Perk[] = [
   {
     icon: Building2,
     title: 'Premium Workspace',
@@ -31,7 +32,7 @@ const perks = [
   },
 ];
 
-const roles = [
+const roles: Role[] = [
   { role: 'Sales Development Representative (SDR)', team: 'Outbound Sales', shift: 'Night Shift', location: 'Lahore HQ' },
   { role: 'Appointment Setter', team: 'Lead Generation', shift: 'Night Shift', location: 'Lahore HQ' },
   { role: 'Inbound CX Specialist', team: 'Customer Operations', shift: 'Night Shift', location: 'Lahore HQ' },
@@ -117,7 +118,7 @@ export default function CareersPage() {
       </section>
 
       {/* --- PERKS GRID (SUPPORTING INFO) --- */}
-      <section className="bg-slate-50 py-20 dark:bg-slate-900/50">
+      <section className="bg-slate-50 py-16 dark:bg-slate-900/50 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1} variants={reveal}>
              <span className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.3em] text-red-600 dark:border-red-500/20 dark:bg-red-500/10">
