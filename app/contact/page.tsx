@@ -1,10 +1,11 @@
 'use client';
 
+import { useEffect } from 'react'; // Added React import for scroll fix
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const reveal = {
-  hidden: { opacity: 0, y: 0 }, // Removed 'y' offset to prevent any vertical "jumping"
+  hidden: { opacity: 0, y: 0 }, 
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
@@ -17,8 +18,16 @@ const reveal = {
 };
 
 export default function ContactPage() {
+  
+  // --- HARD RESET SCROLL ---
+  // This ensures the page starts at (0,0) even if Next.js tries to restore scroll position
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="bg-white text-slate-900 dark:bg-slate-950 dark:text-gray-200">
+      
       {/* --- HERO SECTION --- */}
       <section className="relative overflow-hidden bg-slate-50/50 pb-40 pt-10 dark:bg-slate-950">
         <div className="absolute inset-x-0 top-0 -z-10 h-full bg-grid-slate-200/[0.3] [mask-image:linear-gradient(to_bottom,white_10%,transparent_100%)] dark:bg-grid-slate-800/[0.2]" />

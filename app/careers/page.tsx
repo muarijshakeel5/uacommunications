@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, Building2, Rocket } from 'lucide-react';
 
@@ -30,7 +31,6 @@ const perks = [
   },
 ];
 
-// UPDATED ROLES ARRAY
 const roles = [
   { role: 'Sales Development Representative (SDR)', team: 'Outbound Sales', shift: 'Night Shift', location: 'Lahore HQ' },
   { role: 'Appointment Setter', team: 'Lead Generation', shift: 'Night Shift', location: 'Lahore HQ' },
@@ -38,6 +38,12 @@ const roles = [
 ];
 
 export default function CareersPage() {
+  
+  // --- HARD RESET SCROLL ---
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="bg-white text-slate-900 dark:bg-slate-950 dark:text-gray-200">
       
@@ -62,7 +68,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* --- OPEN ROLES TABLE (MOVED UP) --- */}
+      {/* --- OPEN ROLES TABLE (PRIORITY VIEW) --- */}
       <section className="bg-white pb-20 pt-4 lg:pt-6 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1} variants={reveal}>
@@ -110,7 +116,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* --- PERKS GRID (MOVED DOWN) --- */}
+      {/* --- PERKS GRID (SUPPORTING INFO) --- */}
       <section className="bg-slate-50 py-20 dark:bg-slate-900/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1} variants={reveal}>
