@@ -462,6 +462,18 @@ body {
   margin-top: 2rem;
 }
 
+.mb-1\.5 {
+  margin-bottom: .375rem;
+}
+
+.mt-0\.5 {
+  margin-top: .125rem;
+}
+
+.mt-2\.5 {
+  margin-top: .625rem;
+}
+
 .block {
   display: block;
 }
@@ -874,6 +886,10 @@ body {
   gap: 1px;
 }
 
+.gap-2\.5 {
+  gap: .625rem;
+}
+
 .gap-x-1 {
   -moz-column-gap: .25rem;
   column-gap: .25rem;
@@ -1243,6 +1259,16 @@ body {
   background-color: #fffffff2;
 }
 
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
+}
+
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -1287,6 +1313,10 @@ body {
 
 .p-px {
   padding: 1px;
+}
+
+.p-3\.5 {
+  padding: .875rem;
 }
 
 .px-2 {
@@ -1443,6 +1473,14 @@ body {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.pb-3 {
+  padding-bottom: .75rem;
 }
 
 .text-left {
@@ -2227,6 +2265,11 @@ body {
   background-color: #020617f2;
 }
 
+.dark\:bg-slate-600:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
+}
+
 .dark\:bg-grid-slate-800:is(.dark *) {
   background-image: linear-gradient(#3341558c 1px, #0000 1px), linear-gradient(90deg, #3341558c 1px, #0000 1px);
 }
@@ -2363,6 +2406,14 @@ body {
 
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-\[0\.9fr_1\.1fr\] {
+    grid-template-columns: .9fr 1.1fr;
+  }
+
+  .sm\:grid-cols-\[1\.05fr_0\.95fr\] {
+    grid-template-columns: 1.05fr .95fr;
   }
 
   .sm\:flex-row {
@@ -2562,6 +2613,12 @@ body {
     gap: 1.5rem;
   }
 
+  .lg\:space-y-24 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(6rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(6rem * var(--tw-space-y-reverse));
+  }
+
   .lg\:border-b-0 {
     border-bottom-width: 0;
   }
@@ -2640,6 +2697,14 @@ body {
 
   .lg\:pt-14 {
     padding-top: 3.5rem;
+  }
+
+  .lg\:pb-6 {
+    padding-bottom: 1.5rem;
+  }
+
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .lg\:text-6xl {
