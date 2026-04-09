@@ -103,10 +103,15 @@ export default function CareersPage() {
                       <td className="whitespace-nowrap px-6 py-5">{role.shift}</td>
                       <td className="whitespace-nowrap px-6 py-5">{role.location}</td>
                       <td className="whitespace-nowrap px-6 py-5 text-right">
-                        <button className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white transition-all hover:bg-red-700">
+                        <a 
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSdfDQcv91j_vZbyFxz0qqx6S-yqBK1UY85ETmSl82Pa-yA6oQ/viewform"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white transition-all hover:bg-red-700"
+                        >
                           Apply Now
                           <ArrowRight className="h-3 w-3" />
-                        </button>
+                        </a>
                       </td>
                     </tr>
                   ))}
