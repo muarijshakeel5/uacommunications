@@ -2027,6 +2027,10 @@ body {
   opacity: .6;
 }
 
+.disabled\:opacity-70:disabled {
+  opacity: .7;
+}
+
 .group:hover .group-hover\:bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));

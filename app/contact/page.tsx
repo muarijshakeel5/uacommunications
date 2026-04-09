@@ -3,9 +3,9 @@
 import { ContactChannel } from '@/types';
 import { motion } from 'framer-motion';
 import { 
-  CheckCircle2, Mail, MapPin, Phone, ShieldCheck 
+  CheckCircle2, Mail, MapPin, Phone, ShieldCheck, Loader2
 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const reveal = {
   hidden: { opacity: 0, y: 0 }, 
@@ -27,12 +27,41 @@ const channels: ContactChannel[] = [
 ];
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   
   // --- HARD RESET SCROLL ---
-  // This ensures the page starts at (0,0) even if Next.js tries to restore scroll position
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+    
+    // Your exact Web3Forms Access Key
+    formData.append("access_key", "10a6d653-8312-49a0-8b01-dd44af985584"); 
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        target.reset(); // Clear the form
+        setTimeout(() => setIsSuccess(false), 5000); // Reset button text after 5s
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main className="bg-white text-slate-900 dark:bg-slate-950 dark:text-gray-200">
@@ -80,26 +109,66 @@ export default function ContactPage() {
               <ShieldCheck className="h-5 w-5 text-slate-200 dark:text-slate-700" />
             </div>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              
+              {/* --- ANTI-SPAM HONEYPOT --- */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1">
                   <label className="ml-1 text-[9px] font-bold uppercase tracking-widest text-gray-400">Full Name</label>
-                  <input type="text" placeholder="John Doe" className="h-10 w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 text-sm outline-none transition-all focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" />
+                  <input 
+                    type="text" 
+                    name="Full Name"
+                    required
+                    placeholder="John Doe" 
+                    className="h-10 w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 text-sm outline-none transition-all focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" 
+                  />
                 </div>
                 <div className="space-y-1">
                   <label className="ml-1 text-[9px] font-bold uppercase tracking-widest text-gray-400">Work Email</label>
-                  <input type="email" placeholder="john@company.com" className="h-10 w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 text-sm outline-none transition-all focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" />
+                  <input 
+                    type="email" 
+                    name="Work Email"
+                    required
+                    placeholder="john@company.com" 
+                    className="h-10 w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 text-sm outline-none transition-all focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" 
+                  />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <label className="ml-1 text-[9px] font-bold uppercase tracking-widest text-gray-400">Message</label>
-                <textarea rows={4} placeholder="Describe bottlenecks or goals..." className="w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 py-2 text-sm outline-none focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" />
+                <textarea 
+                  name="Message"
+                  required
+                  rows={4} 
+                  placeholder="Describe bottlenecks or goals..." 
+                  className="w-full rounded-lg border border-gray-100 bg-slate-50/50 px-3 py-2 text-sm outline-none focus:border-red-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950" 
+                />
               </div>
 
-              <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-red-700">
-                Deploy Inquiry
-                <CheckCircle2 className="h-3.5 w-3.5" />
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-red-700 disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <>
+                    Deploying...
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  </>
+                ) : isSuccess ? (
+                  <>
+                    Inquiry Deployed
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                  </>
+                ) : (
+                  <>
+                    Deploy Inquiry
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
